@@ -1,7 +1,9 @@
 package br.com.connectfood.connectfood.controllers;
 
+import br.com.connectfood.connectfood.dto.UsuarioRequestDTO;
 import br.com.connectfood.connectfood.models.Usuario;
 import br.com.connectfood.connectfood.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -47,7 +49,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Void> saveUsuario(
-            @RequestBody Usuario usuario
+           @Valid @RequestBody UsuarioRequestDTO usuario
     ){
         logger.info("POST -> /usuarios/");
         this.usuarioService.saveUsuario(usuario);

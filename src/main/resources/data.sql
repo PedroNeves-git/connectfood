@@ -6,7 +6,7 @@ CREATE TABLE USUARIOS(
                          email VARCHAR(255),
                          senha VARCHAR(255),
                          endereco VARCHAR(255),
-                        data_ultima_alteracao DATE
+                        data_ultima_alteracao TIMESTAMP
 );
 
 insert into usuarios(nome, email, senha, endereco, data_ultima_alteracao) values

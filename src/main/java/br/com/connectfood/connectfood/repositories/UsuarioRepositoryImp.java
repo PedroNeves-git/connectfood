@@ -38,11 +38,11 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     @Override
     public Integer save(Usuario usuario) {
         return this.jdbcClient
-                .sql("INSERT INTO USUARIOS (nome, email, senha, endereco, dataUltimaAlteracao) Values (:nome, :email, :senha, :endereco, :dataUltimaAlteracao)")
+                .sql("INSERT INTO USUARIOS (nome, email, senha, endereco, data_ultima_alteracao) Values (:nome, :email, :senha, :endereco, :dataUltimaAlteracao)")
                 .param("nome", usuario.getNome())
                 .param("email", usuario.getEmail())
                 .param("senha", usuario.getSenha())
-                .param("endereco", usuario.getEmail())
+                .param("endereco", usuario.getEndereco())
                 .param("dataUltimaAlteracao", usuario.getDataUltimaAlteracao())
                 .update();
     }
@@ -50,12 +50,12 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     @Override
     public Integer update(Usuario usuario, Long id) {
         return this.jdbcClient
-                .sql("UPDATE USUARIOS SET nome = :nome, email = :email, senha = :senha, endereco = :endereco, dataUltimaAlteracao = :dataUltimaAlteracao where id = :id")
+                .sql("UPDATE USUARIOS SET nome = :nome, email = :email, senha = :senha, endereco = :endereco, data_ultima_alteracao = :dataUltimaAlteracao where id = :id")
                 .param("id", id)
                 .param("nome", usuario.getNome())
                 .param("email", usuario.getEmail())
                 .param("senha", usuario.getSenha())
-                .param("endereco", usuario.getEmail())
+                .param("endereco", usuario.getEndereco())
                 .param("dataUltimaAlteracao", usuario.getDataUltimaAlteracao())
                 .update();
     }

@@ -1,5 +1,9 @@
 package br.com.connectfood.connectfood.models;
 
+import br.com.connectfood.connectfood.dto.UsuarioRequestDTO;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,11 +17,13 @@ public class Usuario {
 
     private String senha;
 
-    private Date dataUltimaAlteracao;
+    private OffsetDateTime dataUltimaAlteracao;
 
     private String endereco;
 
-    public Usuario(Long id, String nome, String email, String senha, Date dataUltimaAlteracao, String endereco) {
+    public Usuario() {}
+
+    public Usuario(Long id, String nome, String email, String senha, OffsetDateTime  dataUltimaAlteracao, String endereco) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -25,6 +31,16 @@ public class Usuario {
         this.dataUltimaAlteracao = dataUltimaAlteracao;
         this.endereco = endereco;
     }
+
+    public Usuario(UsuarioRequestDTO dto) {
+        this.id = dto.id();
+        this.nome = dto.nome();
+        this.email = dto.email();
+        this.senha = dto.senha();
+        this.endereco = dto.endereco();
+        this.dataUltimaAlteracao = dto.dataUltimaAlteracao();
+    }
+
 
     public Long getId() {
         return id;
@@ -58,11 +74,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Date getDataUltimaAlteracao() {
+    public OffsetDateTime  getDataUltimaAlteracao() {
         return dataUltimaAlteracao;
     }
 
-    public void setDataUltimaAlteracao(Date dataUltimaAlteracao) {
+    public void setDataUltimaAlteracao(OffsetDateTime  dataUltimaAlteracao) {
         this.dataUltimaAlteracao = dataUltimaAlteracao;
     }
 
