@@ -39,9 +39,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Usuario>> findUsuarioById(
-            @PathVariable("id") Long id
-    ){
+    public ResponseEntity<Usuario> findUsuarioById(@PathVariable("id") Long id) {
         logger.info("/usuarios/" + id);
         var usuario = this.usuarioService.findUsuarioById(id);
         return ResponseEntity.ok(usuario);
