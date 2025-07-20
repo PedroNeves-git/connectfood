@@ -17,4 +17,6 @@ public interface UsuarioRepository {
 
     Integer delete(Long id);
 
+    Optional<Usuario> findByLogin(String login);
+
 }

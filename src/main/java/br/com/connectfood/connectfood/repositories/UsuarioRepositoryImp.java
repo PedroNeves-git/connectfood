@@ -38,25 +38,27 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
     @Override
     public Integer save(Usuario usuario) {
         return this.jdbcClient
-                .sql("INSERT INTO USUARIOS (nome, email, senha, endereco, data_ultima_alteracao) Values (:nome, :email, :senha, :endereco, :dataUltimaAlteracao)")
+                .sql("INSERT INTO USUARIOS (nome, email, senha, endereco, data_ultima_alteracao, login) Values (:nome, :email, :senha, :endereco, :dataUltimaAlteracao, :login)")
                 .param("nome", usuario.getNome())
                 .param("email", usuario.getEmail())
                 .param("senha", usuario.getSenha())
                 .param("endereco", usuario.getEndereco())
                 .param("dataUltimaAlteracao", usuario.getDataUltimaAlteracao())
+                .param("login", usuario.getLogin())
                 .update();
     }
 
     @Override
     public Integer update(Usuario usuario, Long id) {
         return this.jdbcClient
-                .sql("UPDATE USUARIOS SET nome = :nome, email = :email, senha = :senha, endereco = :endereco, data_ultima_alteracao = :dataUltimaAlteracao where id = :id")
+                .sql("UPDATE USUARIOS SET nome = :nome, email = :email, senha = :senha, endereco = :endereco, data_ultima_alteracao = :dataUltimaAlteracao, login =:login where id = :id")
                 .param("id", id)
                 .param("nome", usuario.getNome())
                 .param("email", usuario.getEmail())
                 .param("senha", usuario.getSenha())
                 .param("endereco", usuario.getEndereco())
                 .param("dataUltimaAlteracao", usuario.getDataUltimaAlteracao())
+                .param("login", usuario.getLogin())
                 .update();
     }
 
@@ -68,5 +70,13 @@ public class UsuarioRepositoryImp implements UsuarioRepository {
                 .update();
     }
 
+    @Override
+    public Optional<Usuario> findByLogin(String login) {
+        return this.jdbcClient
+                .sql("SELECT * FROM USUARIOS WHERE LOGIN = :login")
+                .param("login", login)
+                .query(Usuario.class)
+                .optional();
+    }
 
 }

@@ -1,6 +1,9 @@
 package br.com.connectfood.connectfood.controllers;
 
+import br.com.connectfood.connectfood.dto.AlteracaoSenhaDTO;
 import br.com.connectfood.connectfood.dto.UsuarioRequestDTO;
+import br.com.connectfood.connectfood.dto.login.LoginRequestDTO;
+import br.com.connectfood.connectfood.dto.login.LoginResponseDTO;
 import br.com.connectfood.connectfood.models.Usuario;
 import br.com.connectfood.connectfood.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -51,7 +54,7 @@ public class UsuarioController {
     ){
         logger.info("POST -> /usuarios/");
         this.usuarioService.saveUsuario(usuario);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
@@ -72,6 +75,18 @@ public class UsuarioController {
         logger.info("DELETE -> /usuarios/");
         this.usuarioService.deleteUsuario(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/senha")
+    public ResponseEntity<Void> trocarSenha(@PathVariable Long id, @RequestBody AlteracaoSenhaDTO dto) {
+        usuarioService.trocarSenha(id, dto.senhaAntiga(), dto.novaSenha());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO dto) {
+        var response = usuarioService.autenticar(dto);
+        return ResponseEntity.ok(response);
     }
 
 

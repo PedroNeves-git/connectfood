@@ -21,15 +21,18 @@ public class Usuario {
 
     private String endereco;
 
+    private String login;
+
     public Usuario() {}
 
-    public Usuario(Long id, String nome, String email, String senha, OffsetDateTime  dataUltimaAlteracao, String endereco) {
+    public Usuario(Long id, String nome, String email, String senha, OffsetDateTime  dataUltimaAlteracao, String endereco, String login) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.dataUltimaAlteracao = dataUltimaAlteracao;
         this.endereco = endereco;
+        this.login = login;
     }
 
     public Usuario(UsuarioRequestDTO dto) {
@@ -39,6 +42,7 @@ public class Usuario {
         this.senha = dto.senha();
         this.endereco = dto.endereco();
         this.dataUltimaAlteracao = dto.dataUltimaAlteracao();
+        this.login = dto.login();
     }
 
 
@@ -90,17 +94,12 @@ public class Usuario {
         this.endereco = endereco;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id) && Objects.equals(nome, usuario.nome) && Objects.equals(email, usuario.email) && Objects.equals(senha, usuario.senha) && Objects.equals(dataUltimaAlteracao, usuario.dataUltimaAlteracao) && Objects.equals(endereco, usuario.endereco);
+    public String getLogin() {
+        return login;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, email, senha, dataUltimaAlteracao, endereco);
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Override
@@ -112,6 +111,7 @@ public class Usuario {
                 ", senha='" + senha + '\'' +
                 ", dataUltimaAlteracao=" + dataUltimaAlteracao +
                 ", endereco='" + endereco + '\'' +
+                ", login='" + login + '\''+
                 '}';
     }
 }

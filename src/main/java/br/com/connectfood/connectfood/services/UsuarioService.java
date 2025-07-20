@@ -1,15 +1,19 @@
 package br.com.connectfood.connectfood.services;
 
 import br.com.connectfood.connectfood.dto.UsuarioRequestDTO;
+import br.com.connectfood.connectfood.dto.login.LoginRequestDTO;
+import br.com.connectfood.connectfood.dto.login.LoginResponseDTO;
 import br.com.connectfood.connectfood.mapper.UsuarioMapper;
 import br.com.connectfood.connectfood.models.Usuario;
 import br.com.connectfood.connectfood.repositories.UsuarioRepository;
 import br.com.connectfood.connectfood.services.exceptions.BadRequestException;
 import br.com.connectfood.connectfood.services.exceptions.EntityNotFoundException;
 import br.com.connectfood.connectfood.services.exceptions.ResourceNotFoundException;
+import br.com.connectfood.connectfood.services.exceptions.UnauthorizedException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,4 +58,34 @@ public class UsuarioService {
             throw new ResourceNotFoundException("Usuário com ID " + id + " não localizado");
         }
     }
+
+    public void trocarSenha(Long id, String senhaAntiga, String novaSenha) {
+        Usuario usuario = findUsuarioById(id);
+        if (!usuario.getSenha().equals(senhaAntiga)) {
+            throw new UnauthorizedException("Senha antiga incorreta");
+        }
+        if(novaSenha.equals(senhaAntiga)) {
+            throw new UnauthorizedException("Senha atual, tente uma nova senha");
+        }
+        usuario.setSenha(novaSenha);
+        usuario.setDataUltimaAlteracao(OffsetDateTime.now());
+        updateUsuario(usuario, id);
+    }
+
+    public LoginResponseDTO autenticar(LoginRequestDTO dto) {
+        Usuario usuario = usuarioRepository.findByLogin(dto.login())
+                .orElseThrow(() -> new ResourceNotFoundException("Login não encontrado"));
+
+        if (!usuario.getSenha().equals(dto.senha())) {
+            throw new UnauthorizedException("Senha incorreta");
+        }
+
+        return new LoginResponseDTO(
+                usuario.getId(),
+                usuario.getNome(),
+                "*****",
+                usuario.getEmail()
+        );
+    }
+
 }

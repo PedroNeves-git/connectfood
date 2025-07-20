@@ -14,7 +14,8 @@ public class UsuarioMapper {
                 dto.email(),
                 dto.senha(),
                 dto.dataUltimaAlteracao(),
-                dto.endereco()
+                dto.endereco(),
+                dto.login()
         );
     }
 }

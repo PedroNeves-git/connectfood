@@ -18,6 +18,8 @@ public record UsuarioRequestDTO(
 
         OffsetDateTime dataUltimaAlteracao,
 
-         String endereco
+         String endereco,
+         @NotNull(message = "O login deve ser preenchido")
+         String login
 ) {
 }
