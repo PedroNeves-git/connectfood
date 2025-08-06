@@ -20,6 +20,8 @@ public record UsuarioRequestDTO(
 
          String endereco,
          @NotNull(message = "O login deve ser preenchido")
-         String login
+         String login,
+         @NotNull(message = "O tipo do usuário deve ser preenchido")
+         Long tipoUsuarioId
 ) {
 }

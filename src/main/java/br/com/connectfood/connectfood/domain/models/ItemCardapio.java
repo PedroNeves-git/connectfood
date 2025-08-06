@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "ITENS_CARDAPIO")
+@Table(name = "itens_cardapio")
 public class ItemCardapio {
 
     @Id
@@ -26,6 +26,7 @@ public class ItemCardapio {
 
     @Column(name = "restaurante_id")
     private Long restauranteId;
+
 
     public ItemCardapio() {}
 

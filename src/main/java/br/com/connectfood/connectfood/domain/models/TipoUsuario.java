@@ -3,15 +3,19 @@ package br.com.connectfood.connectfood.domain.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TIPO_USUARIO")
+@Table(name = "tipos_usuarios")
 public class TipoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nome", nullable = false, unique = true)
+    @Column(name = "nome_tipo", nullable = false, unique = true)
     private String nomeTipo;
 
-    public TipoUsuario(Long id, String nomeTipo) {}
+    public TipoUsuario(Long id, String nomeTipo) {
+        this.id = id;
+        this.nomeTipo = nomeTipo;
+
+    }
 
     public TipoUsuario() {}
 

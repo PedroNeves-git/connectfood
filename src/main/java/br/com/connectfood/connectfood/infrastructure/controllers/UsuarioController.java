@@ -6,6 +6,7 @@ import br.com.connectfood.connectfood.application.dto.login.LoginRequestDTO;
 import br.com.connectfood.connectfood.application.dto.login.LoginResponseDTO;
 import br.com.connectfood.connectfood.domain.models.Usuario;
 import br.com.connectfood.connectfood.domain.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class UsuarioController {
 
     // http://localhost:8080/usuarios/1
     // http://localhost:8080/usuarios?page=1
-
+    @Operation(summary = "Lista todos os usuários paginados")
     @GetMapping
     public ResponseEntity<List<Usuario>> findAllUsuarios(
             @RequestParam("page") int page,
@@ -39,6 +40,7 @@ public class UsuarioController {
         var usuarios = this.usuarioService.findAllUsuarios(page, size);
         return ResponseEntity.ok(usuarios);
     }
+    @Operation(summary = "Busca usuário pelo ID")
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> findUsuarioById(@PathVariable("id") Long id) {
         logger.info("/usuarios/" + id);
@@ -46,6 +48,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    @Operation(summary = "Cadastra um novo usuário")
     @PostMapping
     public ResponseEntity<Void> saveUsuario(
            @Valid @RequestBody UsuarioRequestDTO usuario
@@ -55,6 +58,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Operation(summary = "Atualiza dados do usuário")
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateUsuario(
             @PathVariable("id") Long id,
@@ -65,7 +69,7 @@ public class UsuarioController {
         var status = HttpStatus.NO_CONTENT;
         return ResponseEntity.status(status.value()).build();
     }
-
+    @Operation(summary = "Deleta um usuário")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(
             @PathVariable("id") Long id
@@ -75,12 +79,14 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Troca a senha de um usuário")
     @PutMapping("/{id}/senha")
     public ResponseEntity<Void> trocarSenha(@PathVariable Long id, @RequestBody AlteracaoSenhaDTO dto) {
         usuarioService.trocarSenha(id, dto.senhaAntiga(), dto.novaSenha());
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Realiza login de usuário")
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO dto) {
         var response = usuarioService.autenticar(dto);

@@ -1,11 +1,16 @@
 package br.com.connectfood.connectfood.domain.models;
 
 import br.com.connectfood.connectfood.application.dto.UsuarioRequestDTO;
+import jakarta.persistence.*;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -19,6 +24,13 @@ public class Usuario {
     private String endereco;
 
     private String login;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_usuario_id")
+    private TipoUsuario tipoUsuario;
+
+    @OneToMany(mappedBy = "dono", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Restaurante> restaurantes;
 
     public Usuario() {}
 
@@ -99,16 +111,11 @@ public class Usuario {
         this.login = login;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                ", dataUltimaAlteracao=" + dataUltimaAlteracao +
-                ", endereco='" + endereco + '\'' +
-                ", login='" + login + '\''+
-                '}';
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 }

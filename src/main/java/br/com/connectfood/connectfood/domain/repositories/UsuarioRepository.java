@@ -1,22 +1,10 @@
 package br.com.connectfood.connectfood.domain.repositories;
 
 import br.com.connectfood.connectfood.domain.models.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface UsuarioRepository {
-
-    Optional<Usuario> findById(Long id);
-
-    List<Usuario> findAll(int size, int offset);
-
-    Integer save(Usuario usuario);
-
-    Integer update(Usuario usuario, Long id);
-
-    Integer delete(Long id);
-
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByLogin(String login);
-
 }

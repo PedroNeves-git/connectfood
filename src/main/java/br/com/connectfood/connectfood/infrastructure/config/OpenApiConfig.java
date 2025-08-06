@@ -20,7 +20,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Connectfood")
                         .description("API para gerenciar restaurantes e usuarios")
-                        .version("1.0.0")
+                        .version("2.0.0")
                         .contact(new Contact()
                                 .name("Pedro Henrique Neves dos Santos")
                                 .email("sgtpedrocos@gmail.com")

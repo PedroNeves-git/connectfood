@@ -1,9 +1,10 @@
 package br.com.connectfood.connectfood.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "RESTAURANTES")
+@Table(name = "restaurantes")
 public class Restaurante {
 
     @Id
@@ -20,18 +21,21 @@ public class Restaurante {
     @Column(name = "horario_funcionamento")
     private String horarioFuncionamento;
 
-    @Column(name = "dono_id")
-    private Long donoId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dono_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Usuario dono;
+
 
     public Restaurante() {}
 
-    public Restaurante(Long id, String nome, String endereco, String tipoCozinha, String horarioFuncionamento, Long donoId) {
+    public Restaurante(Long id, String nome, String endereco, String tipoCozinha, String horarioFuncionamento, Usuario dono) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.tipoCozinha = tipoCozinha;
         this.horarioFuncionamento = horarioFuncionamento;
-        this.donoId = donoId;
+        this.dono = dono;
     }
 
     public Long getId() {
@@ -54,10 +58,6 @@ public class Restaurante {
         return horarioFuncionamento;
     }
 
-    public Long getDonoId() {
-        return donoId;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -78,10 +78,6 @@ public class Restaurante {
         this.horarioFuncionamento = horarioFuncionamento;
     }
 
-    public void setDonoId(Long donoId) {
-        this.donoId = donoId;
-    }
-
     @Override
     public String toString() {
         return "Restaurante{" +
@@ -90,8 +86,16 @@ public class Restaurante {
                 ", endereco='" + endereco + '\'' +
                 ", tipoCozinha='" + tipoCozinha + '\'' +
                 ", horarioFuncionamento='" + horarioFuncionamento + '\'' +
-                ", donoId=" + donoId +
+                ", dono='" + dono + '\'' +
                 '}';
+    }
+
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public void setDono(Usuario dono) {
+        this.dono = dono;
     }
 }
 

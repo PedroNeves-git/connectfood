@@ -1,19 +1,52 @@
 {
 	"info": {
-		"_postman_id": "aca2e27c-7b8a-4f13-925f-ab1cad87a5b1",
-		"name": "connectfood",
+		"_postman_id": "70b99f0a-8773-4b44-b18f-714ec442f3ff",
+		"name": "Connectfood",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "36887216"
 	},
 	"item": [
 		{
-			"name": "usuarios",
+			"name": "usuario",
 			"item": [
 				{
-					"name": "get usuarios",
+					"name": "Criar Usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Jo\\u00e3o\",\n  \"email\": \"joao@email.com\",\n  \"senha\": \"123456\",\n  \"endereco\": \"Rua A\",\n  \"dataUltimaAlteracao\": \"2025-08-04T00:00:00Z\",\n  \"login\": \"joaologin\",\n  \"tipoUsuarioId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuários",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8081/usuarios?page=1&size=10",
 							"protocol": "http",
@@ -39,10 +72,15 @@
 					"response": []
 				},
 				{
-					"name": "get usuarios id",
+					"name": "Buscar Usuário por ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8081/usuarios/1",
 							"protocol": "http",
@@ -59,46 +97,18 @@
 					"response": []
 				},
 				{
-					"name": "post usuarios",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"string\",\r\n  \"email\": \"string\",\r\n  \"senha\": \"string\",\r\n  \"dataUltimaAlteracao\": \"2025-07-20T01:38:48.574Z\",\r\n  \"endereco\": \"string\",\r\n  \"login\": \"string\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/usuarios",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"usuarios"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "put usuarios",
+					"name": "Atualizar Usuário",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"string\",\r\n  \"email\": \"string\",\r\n  \"senha\": \"string\",\r\n  \"dataUltimaAlteracao\": \"2025-07-20T01:39:43.777Z\",\r\n  \"endereco\": \"string\",\r\n  \"login\": \"string\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"id\": 1,\n  \"nome\": \"Jo\\u00e3o Atualizado\",\n  \"email\": \"joao@email.com\",\n  \"senha\": \"123456\",\n  \"endereco\": \"Rua A\",\n  \"dataUltimaAlteracao\": \"2025-08-04T00:00:00Z\",\n  \"login\": \"joaologin\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8081/usuarios/1",
@@ -116,47 +126,18 @@
 					"response": []
 				},
 				{
-					"name": "delete usuarios",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/usuarios/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"usuarios",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AlteraSenha",
+					"name": "Trocar Senha",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"senhaAntiga\": \"nova123\",\n  \"novaSenha\": \"nova123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"senhaAntiga\": \"123456\",\n  \"novaSenha\": \"654321\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8081/usuarios/1/senha",
@@ -175,19 +156,43 @@
 					"response": []
 				},
 				{
-					"name": "login",
+					"name": "Deletar Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/usuarios/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"login\": \"pedro123\",\r\n  \"senha\": \"1234\"\r\n}"
+							"raw": "{\n  \"login\": \"joaologin\",\n  \"senha\": \"654321\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8081/usuarios/login",
@@ -199,6 +204,409 @@
 							"path": [
 								"usuarios",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tipoUsuario",
+			"item": [
+				{
+					"name": "Listar TiposUsuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/tipos-usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"tipos-usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar TipoUsuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Dono de Restaurante\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/tipos-usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"tipos-usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar TipoUsuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/tipos-usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"tipos-usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar TipoUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Cliente\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/tipos-usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"tipos-usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar TipoUsuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/tipos-usuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"tipos-usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "itemCardapio",
+			"item": [
+				{
+					"name": "Listar ItensCardapio",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/itens-cardapio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"itens-cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar itens-cardapio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"string\",\n  \"descricao\": \"string\",\n  \"preco\": 0,\n  \"somenteLocal\": true,\n  \"caminhoFoto\": \"string\",\n  \"restauranteId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/itens-cardapio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"itens-cardapio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar itens-cardapio por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/itens-cardapio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"itens-cardapio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar itens-cardapio",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"novoitem\",\n  \"descricao\": \"string\",\n  \"preco\": 0,\n  \"somenteLocal\": false,\n  \"caminhoFoto\": \"string\",\n  \"restauranteId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/itens-cardapio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"itens-cardapio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletar itens-cardapio por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/itens-cardapio/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"itens-cardapio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "restaurante",
+			"item": [
+				{
+					"name": "Criar Restaurante",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Restaurante Teste\",\n  \"endereco\": \"Av. Brasil\",\n  \"tipoCozinha\": \"Italiana\",\n  \"horarioFuncionamento\": \"10:00 \\u00e0s 22:00\",\n  \"idDono\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/restaurantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Restaurantes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/restaurantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"restaurantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Restaurante por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Restaurante",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Restaurante Atualizado\",\n  \"endereco\": \"Av. Brasil, 100\",\n  \"tipoCozinha\": \"Brasileira\",\n  \"horarioFuncionamento\": \"09:00 \\u00e0s 21:00\",\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"restaurantes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Restaurante",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/restaurantes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"restaurantes",
+								"1"
 							]
 						}
 					},
